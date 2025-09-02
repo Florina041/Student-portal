@@ -1,23 +1,24 @@
-const Budget = require("../models/budgetModel");
+import Budget from "../models/budgetModel.js";
 
-const getBudgets = async (req, res) => {
+let getBudgets = async (req, res) => {
   try {
-    const budgets = await Budget.find().populate("society", "name");
+    
+    let budgets = await Budget.find().populate("society", "name");
     res.json(budgets);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-const createBudget = async (req, res) => {
+let createBudget = async (req, res) => {
   try {
-    const { amount, description, society } = req.body;
+    let { amount, description, society } = req.body;
 
-    const budget = await Budget.create({
+    let budget = await Budget.create({
       amount,
       description,
       society,
-      createdBy: req.user._id,
+      createdBy: req.user._id, 
     });
 
     res.status(201).json(budget);
@@ -26,4 +27,4 @@ const createBudget = async (req, res) => {
   }
 };
 
-module.exports = { getBudgets, createBudget };
+export { getBudgets, createBudget };
