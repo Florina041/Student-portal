@@ -1,7 +1,7 @@
 // src/server.js
-const express = require("express");
-const cors = require("cors");
-const societies = require("./data/societies"); // Import societies array
+import express from "express";
+import cors from "cors";
+import societies from "./data/societies.js"; // Import societies array
 
 const app = express();
 

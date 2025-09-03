@@ -19,9 +19,12 @@ const userSchema = new mongoose.Schema({
   },
   refreshToken:{
     type:String,
+  },
+  member: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Member"
   }
-}, { timestamps: true }
-);
+},{timestamps:true});
 
 // Encrypt password before save
 userSchema.pre("save", async function (next) {

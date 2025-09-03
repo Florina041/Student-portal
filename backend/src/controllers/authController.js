@@ -26,7 +26,7 @@ export const registerUser = async (req, res) => {
       user:{id:user._id,name:user.name,email:user.email}
     });
   } catch (error) {
-    res.status(500).json({ message:"Server Error", error });
+    res.status(500).json({message: error.message });
   }
 };
 
@@ -51,7 +51,7 @@ export const loginUser = async (req, res) => {
       res.status(401).json({ message: "Invalid email or password" });
     }
   } catch (error) {
-    res.status(500).json({ message:"Server Error",error });
+    res.status(500).json({ message: error.message });
   }
 };
 

@@ -13,11 +13,28 @@ const budgetSchema = new mongoose.Schema({
     trim: true,
     maxlength: 3
   },
-  description: { type: String, trim: true },
-  category: { type: String, trim: true },
-  society: { type: mongoose.Schema.Types.ObjectId, ref: "Society", index: true, required: true },
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  deletedAt: { type: Date, default: null }
+  description: {
+    type: String, 
+    trim: true
+   },
+  category: {
+    type: String, 
+    trim: true 
+  },
+  society: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "Society", 
+    index: true, 
+    required: true 
+  },
+  createdBy: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "User", required: true 
+  },
+  deletedAt: { 
+    type: Date, 
+    default: null 
+  }
 }, {
   timestamps: true,
   toJSON: { virtuals: true, transform(doc, ret) { delete ret.__v; } },

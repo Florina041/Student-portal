@@ -1,7 +1,7 @@
-const Event = require("../models/eventModel");
+import { Event } from "../models/Event.js"
 
 // Get all events
-const getEvents = async (req, res) => {
+export const getEvents = async (req, res) => {
   try {
     const events = await Event.find().populate("society", "name").populate("createdBy", "name email");
     res.json(events);
@@ -11,9 +11,17 @@ const getEvents = async (req, res) => {
 };
 
 // Create new event
-const createEvent = async (req, res) => {
+export const createEvent = async (req, res) => {
   try {
     const { title, description, date, society } = req.body;
+
+    // Inside createEvent
+    if (req.user.member.role === "Coordinator") {
+      if (req.user.member.society.toString() !== society._id.toString()) {
+        return res.status(403).json({ message: "Coordinators can only create events for their own society" });
+      }
+    }
+
 
     const event = await Event.create({
       title,
@@ -29,4 +37,3 @@ const createEvent = async (req, res) => {
   }
 };
 
-module.exports = { getEvents, createEvent };

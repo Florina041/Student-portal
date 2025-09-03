@@ -1,10 +1,13 @@
-const express = require("express");
-const { getEvents, createEvent } = require("../controllers/eventController");
-const { protect } = require("../middleware/authMiddleware");
+import express from "express";
+import { getMembers,addMember } from "../controllers/memberController";
+import { protect,isCoordinatorOrAbove } from "../middleware/authMiddleware.js"
 
 const router = express.Router();
 
-router.get("/", getEvents);
-router.post("/", protect, createEvent);
+//public
+router.get("/", getMembers);
 
-module.exports = router;
+//restricted to coordinators + admin + superadmin
+router.post("/", protect,isCoordinatorOrAbove,addMember);
+
+export default router;

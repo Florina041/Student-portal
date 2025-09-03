@@ -14,7 +14,7 @@ export default function Events() {
       <h2>Events</h2>
       <Table
         data={events}
-        columns={["title", "date", "description", "society", "participants"]}
+        columns={["title", "date", "description", "society"]}
       />
     </div>
   );

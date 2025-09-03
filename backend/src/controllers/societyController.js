@@ -1,6 +1,5 @@
 import { Society } from "../models/Society.js";
 
-
 // Create new society
 export const createSociety = async (req, res) => {
   try {
@@ -67,6 +66,12 @@ export const addMember = async (req,res) =>{
     const society = await Society.findById(req.params.id);
     if(!society) return res.status(404).json({ message:"Society not found" });
 
+    if (req.user.member.role === "Coordinator") {
+      if (req.user.member.society.toString() !== society._id.toString()) {
+        return res.status(403).json({ message: "Coordinators can only manage their own society" });
+      }
+    }
+
     //custom method in society model
     await society.addMember(req.body.memberId);
     res.json(society);
@@ -81,6 +86,11 @@ export const removeMember = async (req,res) =>{
     const society = await Society.findById(req.params.id);
     if(!society) return res.status(404).json({ message:"Society not found" });
 
+    if (req.user.member.role === "Coordinator") {
+      if (req.user.member.society.toString() !== society._id.toString()) {
+        return res.status(403).json({ message: "Coordinators can only manage their own society" });
+      }
+    }
     //custom method from society model
     await society.removeMember(req.body.memberId);
     res.json(society);

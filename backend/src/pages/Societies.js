@@ -14,7 +14,7 @@ export default function Societies() {
       <h2>Societies</h2>
       <Table
         data={societies}
-        columns={["name", "description", "lead", "status", "members"]}
+        columns={["name", "description", "lead","membersCount"]}
       />
     </div>
   );

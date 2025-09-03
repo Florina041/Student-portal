@@ -1,10 +1,10 @@
-const express = require("express");
-const { getBudgets, createBudget } = require("../controllers/budgetController");
-const { protect } = require("../middleware/authMiddleware");
+import express from "express";
+import { getBudgets,createBudget } from "../controllers/budgetContoller.js";
+import { protect,isAdmin,isCoordinatorOrAbove } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.get("/", getBudgets);
-router.post("/", protect, createBudget);
+router.get("/", protect,isAdmin,getBudgets);
+router.post("/", protect,isCoordinatorOrAbove,createBudget);
 
-module.exports = router;
+export default router;

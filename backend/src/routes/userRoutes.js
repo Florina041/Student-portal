@@ -1,15 +1,31 @@
-const express = require("express");
-const { registerUser, loginUser } = require("../controllers/userController");
-const { protect } = require("../middleware/authMiddleware");
+import express from "express";
+import {
+  registerUser,
+  loginUser,
+} from "../controllers/userController.js";
+import {
+  getAllUsers,
+  getUserById,
+  updateUser,
+  deleteUser,
+} from "../controllers/adminUserController.js";
+import { protect, isAdmin, isSuperAdmin } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
+// Public routes
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 
-// Example protected route
+// Protected (any logged-in user can view their own profile)
 router.get("/profile", protect, (req, res) => {
   res.json(req.user);
 });
 
-module.exports = router;
+// Admin-only routes
+router.get("/", protect, isAdmin, getAllUsers);        // Admin + SuperAdmin
+router.get("/:id", protect, isAdmin, getUserById);     // Admin + SuperAdmin
+router.put("/:id", protect, isAdmin, updateUser);      // Admin + SuperAdmin
+router.delete("/:id", protect, isSuperAdmin, deleteUser); // Only SuperAdmin can delete
+
+export default router;

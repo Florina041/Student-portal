@@ -1,86 +1,78 @@
-import { User } from "../models/User.js"
-import jwt from "jsonwebtoken"
+import { User } from "../models/User.js";
 
-//SIGN-UP
-export const registerUser = async (req, res) => {
+// GET all users with populated role
+export const getAllUsers = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const users = await User.find().select("-password -refreshToken").populate("member", "role"); // assuming userSchema has "member" ref
 
-    const userExists = await User.findOne({ email });
-    if (userExists) return res.status(400).json({ message: "User already exists" });
+    // format users so frontend sees role at top-level
+    const formatted = users.map(u => ({
+      _id: u._id,
+      name: u.name,
+      email: u.email,
+      role: u.member?.role || "N/A"
+    }));
+    res.json(formatted);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
 
-    //password will be hashed in pre-save hook
-    const user = new User({ name, email, password}); //User -> mongoose model
-    await user.save(); // user -> document instance of the model
+// GET single user by ID
+export const getUserById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id).select("-password -refreshToken").populate("member", "role");
 
-    const accessToken = generateAccessToken();
-    const refreshToken = generateRefreshToken();
-
-    user.refreshToken = refreshToken; //save refresh token in user object
-    await user.save(); //save user -> password hashed in pre-save hook
-
-    res.status(201).json({
-      message: "User Registered Successfully",
-      accessToken,
-      refreshToken,
-      user:{id:user._id,name:user.name,email:user.email}
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.member?.role || "N/A"
     });
   } catch (error) {
-    res.status(500).json({ message:"Server Error", error });
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
-//LOGIN
-export const loginUser = async (req, res) => {
+// UPDATE user
+export const updateUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { id } = req.params;
+    const { name, email } = req.body;
 
-    const user = await User.findOne({ email });
-    if(!user) return res.status(404).json({ message: "User not found"});
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { name, email },
+      { new: true, runValidators: true }
+    ).select("-password -refreshToken");
 
-    const accessToken = user.generateAccessToken();
-    const refreshToken = user.generateAccessToken();
-
-    if (user && (await user.matchPassword(password))) {
-      res.json({
-        accessToken,
-        refreshToken,
-        user:{id:user._id,name:user.name,email:user.email},
-      });
-    } else {
-      res.status(401).json({ message: "Invalid email or password" });
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
     }
+
+    res.json(updatedUser);
   } catch (error) {
-    res.status(500).json({ message:"Server Error",error });
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
-//REFRESH TOKEN
-export const refreshAccessToken = async (req,res)=>{
-  try{
-    const { refreshToken } = req.body;
-    if(!refreshToken) return res.status(401).json({ message: "Refresh Token missing"});
+// DELETE user
+export const deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-    //verify
-    const payload = jwt.verify(refreshToken,process.env.REFRESH_TOKEN_SECRET);
+    const deletedUser = await User.findByIdAndDelete(id);
 
-    //finding user
-    const user = await User.findOne(payload.sub);
-    if(!user) return res.status(404).json({ message:"User not found"});
-
-    //checking if refreshToken matches the stored one in user object
-    if(user.refreshToken !== refreshToken){
-      return res.status(403).json({ message:"Token has been revoked"});
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found" });
     }
 
-    //now generating new Access Token since its for limited time
-    const newAccessToken = user.generateAccessToken();
-
-    res.json({ accessToken:newAccessToken});
-  }catch(error){
-    res.status(403).json({ message:"Invalid or expired refresh token"})
+    res.json({ message: "User deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
-
-
-

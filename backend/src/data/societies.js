@@ -4,7 +4,7 @@ const societies = [
     id: 1,
     name: "Korus – Music & Dance Society",
     category: "Cultural & Arts",
-    members: 210,
+    membersCount: 210,
     lead: "Aarav Mehta",
     description:
       "Official music & dance society of KIIT nurturing stage talent and performances."
@@ -13,7 +13,7 @@ const societies = [
     id: 2,
     name: "Kalakaar – Dramatic Society",
     category: "Cultural & Arts",
-    members: 165,
+    membersCount: 165,
     lead: "Ananya Roy",
     description:
       "Theatre & nukkad plays; conducts dramatic competitions across campus."
@@ -22,7 +22,7 @@ const societies = [
     id: 3,
     name: "Kreative Eye – Photography & Painting Society",
     category: "Cultural & Arts",
-    members: 180,
+    membersCount: 180,
     lead: "Ritwik Sen",
     description:
       "Photography and painting club capturing campus life and imagination."
@@ -31,7 +31,7 @@ const societies = [
     id: 4,
     name: "Kzarshion – Fashion Society",
     category: "Cultural & Arts",
-    members: 120,
+    membersCount: 120,
     lead: "Meera Kapoor",
     description: "Fashion, styling and runway events."
   },
@@ -39,7 +39,7 @@ const societies = [
     id: 5,
     name: "Kalliope – Literature & Stage Society",
     category: "Cultural & Arts",
-    members: 140,
+    membersCount: 140,
     lead: "Ishaan Verma",
     description:
       "Eloquence, literature and stage performances — celebrate the power of words."
@@ -48,7 +48,7 @@ const societies = [
     id: 6,
     name: "KIIT Wordsmith – Writing Society",
     category: "Cultural & Arts",
-    members: 155,
+    membersCount: 155,
     lead: "Rhea Nair",
     description:
       "For storytellers & poets; workshops and open-mics to hone your writing."
@@ -57,7 +57,7 @@ const societies = [
     id: 7,
     name: "SPIC MACAY – Indian Classical & Culture Society",
     category: "Cultural & Arts",
-    members: 130,
+    membersCount: 130,
     lead: "Devansh Iyer",
     description:
       "Promotes Indian classical music, dance, folk culture, yoga and heritage."
@@ -68,7 +68,7 @@ const societies = [
     id: 8,
     name: "Qutopia – Quizzing Society",
     category: "Academic & Professional",
-    members: 200,
+    membersCount: 200,
     lead: "Pranav Das",
     description: "Official quiz society fostering curiosity and critical thinking."
   },
@@ -76,7 +76,7 @@ const societies = [
     id: 9,
     name: "Kronicle – Literary (Debating) Society",
     category: "Academic & Professional",
-    members: 170,
+    membersCount: 170,
     lead: "Shruti Saha",
     description: "Debate, public speaking and argumentation."
   },
@@ -84,7 +84,7 @@ const societies = [
     id: 10,
     name: "TEDx-KU",
     category: "Academic & Professional",
-    members: 95,
+    membersCount: 95,
     lead: "Aditi Mishra",
     description:
       "Brings the TED experience to campus — ideas worth spreading."
@@ -93,7 +93,7 @@ const societies = [
     id: 11,
     name: "MUN-SOC – Model United Nations Society",
     category: "Academic & Professional",
-    members: 160,
+    membersCount: 160,
     lead: "Samar Khan",
     description:
       "Global diplomacy, UN simulations and international relations."
@@ -102,7 +102,7 @@ const societies = [
     id: 12,
     name: "Konnexions – IT & Web Development Society",
     category: "Academic & Professional",
-    members: 230,
+    membersCount: 230,
     lead: "Naman Gupta",
     description: "Web dev, IT skills and tech workshops."
   },
@@ -110,7 +110,7 @@ const societies = [
     id: 13,
     name: "KIIT Robotics Society",
     category: "Academic & Professional",
-    members: 240,
+    membersCount: 240,
     lead: "Tanvi Raut",
     description: "Research & projects in robotics and automation."
   },
@@ -118,7 +118,7 @@ const societies = [
     id: 14,
     name: "KIIT Society for Civil Engineers",
     category: "Academic & Professional",
-    members: 110,
+    membersCount: 110,
     lead: "Sourav Patnaik",
     description: "Networking, site visits and skill building for civil engineers."
   },
@@ -126,7 +126,7 @@ const societies = [
     id: 15,
     name: "KIIT Electrical Society",
     category: "Academic & Professional",
-    members: 125,
+    membersCount: 125,
     lead: "Arjun Reddy",
     description:
       "Electrical innovation, projects and research initiatives."
@@ -135,7 +135,7 @@ const societies = [
     id: 16,
     name: "Apogeio – Aeronautical Society",
     category: "Academic & Professional",
-    members: 102,
+    membersCount: 102,
     lead: "Mahika Rao",
     description: "Aerospace, drones and aerodynamics."
   },
@@ -143,7 +143,7 @@ const societies = [
     id: 17,
     name: "KIIT Automobile Society",
     category: "Academic & Professional",
-    members: 150,
+    membersCount: 150,
     lead: "Ronit Paul",
     description: "Automotive design, mobility and eco-friendly innovations."
   },
@@ -153,7 +153,7 @@ const societies = [
     id: 18,
     name: "Khwaab – Social Service Society",
     category: "Social Impact & Awareness",
-    members: 260,
+    membersCount: 260,
     lead: "Nikita Behera",
     description:
       "Volunteerism and community outreach inspired by ‘Art of Giving’."
@@ -162,7 +162,7 @@ const societies = [
     id: 19,
     name: "Kamakshi & HeForShe – Women Empowerment Societies",
     category: "Social Impact & Awareness",
-    members: 185,
+    membersCount: 185,
     lead: "Simran Kaur",
     description:
       "Awareness, advocacy and initiatives for gender equality."
@@ -171,7 +171,7 @@ const societies = [
     id: 20,
     name: "KIIT Intl. Student Society",
     category: "Social Impact & Awareness",
-    members: 90,
+    membersCount: 90,
     lead: "Daniel Okoro",
     description:
       "Celebrates diversity and supports international students."
@@ -180,7 +180,7 @@ const societies = [
     id: 21,
     name: "Kimaya – Medical Awareness Society",
     category: "Social Impact & Awareness",
-    members: 130,
+    membersCount: 130,
     lead: "Drishti Patro",
     description:
       "Health awareness, workshops, CMEs and first-aid training."
@@ -189,7 +189,7 @@ const societies = [
     id: 22,
     name: "Kraya & Kuber – Marketing & Finance Society",
     category: "Social Impact & Awareness",
-    members: 175,
+    membersCount: 175,
     lead: "Aditya Sharma",
     description:
       "Marketing, branding, finance and entrepreneurship."
@@ -198,7 +198,7 @@ const societies = [
     id: 23,
     name: "KIIT Animal & Environment Welfare Society",
     category: "Social Impact & Awareness",
-    members: 145,
+    membersCount: 145,
     lead: "Sanjana Rao",
     description:
       "Sustainability and animal welfare — ‘Pause for a Cause’."
@@ -207,7 +207,7 @@ const societies = [
     id: 24,
     name: "Enactus KIIT",
     category: "Social Impact & Awareness",
-    members: 120,
+    membersCount: 120,
     lead: "Harsh Vardhan",
     description:
       "Social entrepreneurship projects improving lives."
@@ -218,7 +218,7 @@ const societies = [
     id: 25,
     name: "Keurig – Food Society",
     category: "Special Interest",
-    members: 100,
+    membersCount: 100,
     lead: "Reema Kulkarni",
     description: "Culinary arts, food culture and tasting events."
   },
@@ -226,7 +226,7 @@ const societies = [
     id: 26,
     name: "KIIT Film Society",
     category: "Special Interest",
-    members: 135,
+    membersCount: 135,
     lead: "Yash Agarwal",
     description: "Filmmaking, editing and production."
   },
@@ -234,7 +234,7 @@ const societies = [
     id: 27,
     name: "Khwahishein – Hindi Literature Society",
     category: "Special Interest",
-    members: 115,
+    membersCount: 115,
     lead: "Aakash Tiwari",
     description: "Celebrates Hindi language and literature."
   },
@@ -242,11 +242,11 @@ const societies = [
     id: 28,
     name: "Kraftovity – Art & Craft Society",
     category: "Special Interest",
-    members: 98,
+    membersCount: 98,
     lead: "Pooja Sinha",
     description:
       "Crafting, décor and DIY creativity for campus events."
   }
 ];
 
-module.exports = societies;
+export default societies;

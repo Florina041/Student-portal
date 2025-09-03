@@ -1,23 +1,40 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 const societySchema = new mongoose.Schema({
   name: { 
     type: String, 
-    required: true,
-    // trim:true, //removes spaces
-    unique: true 
+    required: true, 
+    unique: true, 
+    trim: true 
+  },
+  category: { 
+    type: String, 
+    required: true, 
+    trim: true 
   },
   description: { 
-    type: String,
-    required:true,
+    type: String, 
+    required: true, 
+    trim: true 
+  },
+  lead: { 
+    type: String, 
+    required: true, 
+    trim: true 
+  },
+  membersCount: {   // numeric count, not the refs
+    type: Number, 
+    default: 0, 
+    min: [0, "Members cannot be negative"] 
   },
   members: [
     { 
       type: mongoose.Schema.Types.ObjectId, 
       ref: "Member" 
     }
-  ],
+  ]
 }, { timestamps: true });
+
 
 //some methods
 societySchema.methods.addMember = async function(memberId){
